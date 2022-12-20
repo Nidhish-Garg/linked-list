@@ -1,0 +1,116 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define r(i,a,b) for(int i=a;i<b;i++)
+
+
+class node{//will construct a node with element -> data storing n and ->ptr storing the address of next node
+    //properties
+    public:
+    int data;
+    node* next; 
+    //constructor function
+    node(int n){
+        data=n;
+        next=NULL;
+    }
+};
+
+
+
+
+bool isloop(node* head){
+    node* curr=head;
+    if(curr==NULL){return true;}
+    map<node*,bool>visited;
+    while(curr!=NULL){
+        if(visited[curr]==false){visited[curr]=true;}
+        else{
+            return true;}
+        curr=curr->next;
+    }return false;
+}
+
+
+
+void inserthead(int n, node* &head){
+    node* node1 = new node(n);
+    node1->next=head;
+    head=node1;
+}
+
+
+
+
+int main(){
+//  1->0->2->1->2->NULL
+
+
+
+node* head1;
+node* head2;
+node* t1=head1;
+node* t2=head2;
+node* track1;
+node* track2;
+
+if(head1==NULL){cout<<head2;}
+if(head2==NULL){cout<<head1;}
+int list1=1;
+int list2=0;
+while(t1!=NULL && t2!=NULL){
+
+    if(t1->data < t2->data){
+        if(t1->next==NULL){t1->next=t2;list1=0;list2=1;}
+        if(t1->next->data <= t2->data){t1=t1->next;list1=1;list2=0;continue;}
+        else{track1=t1->next;t1->next=t2;t1=track1;list1=0;list2=1;}
+    }
+
+    if(t1->data > t2->data){
+        if(t2->next==NULL){t2->next=t1;list1=1;list2=0;}
+        if(t2->next->data <= t1->data){t2=t2->next;list1=0;list2=1;continue;}
+        else{track2=t2->next;t2->next=t1;t2=track2;list1=1;list2=0;}
+
+    }
+
+    if(t1->data == t2->data){
+        if(list1==1){
+            track1=t1->next;
+            t1->next=t2;
+            list1=0;list2=1;
+            t1=track1;
+        }
+
+        else{
+            track2=t2->next;
+            t2->next=t1;
+            list1=1;list2=0;
+            t2=track2;
+        }
+    }
+
+
+
+} if (head1->data <= head2->data){cout<< head1<<endl;}
+    else{cout<<head2<<endl;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+return 0;
+}
